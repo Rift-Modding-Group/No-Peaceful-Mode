@@ -1,7 +1,9 @@
 package anightdazingzoroark.nopeacefulmode;
 
 import net.minecraftforge.common.ForgeVersion;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +19,7 @@ import java.util.Map;
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
 @Mod(modid = NoPeacefulMode.MODID, name = "No Peaceful Mode", version = "1.0.0")
 public class NoPeacefulMode implements IEarlyMixinLoader, IFMLLoadingPlugin {
-    public static final String MODID = "assets.nopeacefulmode";
+    public static final String MODID = "nopeacefulmode";
     public static final Logger LOGGER = LogManager.getLogger("No Peaceful Mode");
 
     @Mod.EventHandler
@@ -25,6 +27,10 @@ public class NoPeacefulMode implements IEarlyMixinLoader, IFMLLoadingPlugin {
         LOGGER.info("Hello From {}!", "No Peaceful Mode");
     }
 
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new NoPeacefulModeEvents());
+    }
 
     //mixin stuff here on out
     @Override
